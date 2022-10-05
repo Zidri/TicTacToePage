@@ -4,13 +4,14 @@
 body {
     background-color: #FFF2EB;
     padding: 10px;
+    font-family: 'Kanit', sans-serif;
 }
 
 h1{
     color: #6D6875;
     font-size: 3rem;
     text-align: center;
-    font-family: 'Kanit', sans-serif;
+    
     font-weight: 600;
     text-transform: uppercase;
     line-height: 150%;
@@ -21,7 +22,6 @@ h2{
     color: #6D6875;
     font-size: 2rem;
     text-align: center;
-    font-family: 'Kanit', sans-serif;
     font-weight: 600;
     text-transform: uppercase;    
 }
@@ -35,6 +35,17 @@ h2{
     justify-content: space-around;
     margin-top: 3rem;
 }
+
+/*pregame*/
+.pregame{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin: 10px;
+    font-size: 2rem;
+}
+
 
 /*game*/
 .gameBoard {
@@ -78,11 +89,32 @@ h2{
 .colL {}
 
 /*game positions*/
+.gameBtn{
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
 .gamePos {
     font-size: 4rem;
     width: 5rem;
+    height: 5rem;
 
     display: flex;
     align-items: center;
     justify-content: center;    
+}
+
+.colL:hover{
+    background-color: #FFB4A2;
+}
+.colM:hover{
+    background-color: #FFB4A2;
+}
+.colR:hover{
+    background-color: #FFB4A2;
 }
