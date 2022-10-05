@@ -79,14 +79,10 @@ h2{
 }
 
 /*game cols*/
-.colR {}
-
 .colM {
     border-left: solid black 2px;
     border-right: solid black 2px;
 }
-
-.colL {}
 
 /*game positions*/
 .gameBtn{
