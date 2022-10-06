@@ -14,74 +14,78 @@
     <div class="header">
         <h1>Tic-Tac-Toe</h1>
     </div>
-    <div class="pregame">
-        <div id="turn">Your Turn</div>
-        <div id="warning"></div>
-    </div>
+    
     <div class="container">
-        <div class="gameBoard">
-            <div class="top">
-                <div class="colR">
-                    <button type="button" class="gameBtn" onclick="userTurn('pos0')">
-                        <div class="gamePos" id="pos0"></div>
-                    </button>
-                </div>
-                <div class="colM">
-                    <button type="button" class="gameBtn" onclick="userTurn('pos1')">
-                        <div class="gamePos" id="pos1"></div>
-                    </button>
+        <div class="pregame">
+            <div id="turn">Your Turn</div>
+            <div id="warning"></div>
+        </div>
+        <button type="button" class="btn" id="againBtn" onclick="playAgain()">Play Again?</button>
+        <div class="gameContainer">            
+            <div class="gameBoard">
+                <div class="top">
+                    <div class="colR">
+                        <button type="button" class="gameBtn" onclick="userTurn('pos0')">
+                            <div class="gamePos" id="pos0"></div>
+                        </button>
+                    </div>
+                    <div class="colM">
+                        <button type="button" class="gameBtn" onclick="userTurn('pos1')">
+                            <div class="gamePos" id="pos1"></div>
+                        </button>
 
-                </div>
-                <div class="colL">
-                    <button type="button" class="gameBtn" onclick="userTurn('pos2')">
-                        <div class="gamePos" id="pos2"></div>
-                    </button>
+                    </div>
+                    <div class="colL">
+                        <button type="button" class="gameBtn" onclick="userTurn('pos2')">
+                            <div class="gamePos" id="pos2"></div>
+                        </button>
 
+                    </div>
+                </div>
+                <div class="middle">
+                    <div class="colR">
+                        <button type="button" class="gameBtn" onclick="userTurn('pos3')">
+                            <div class="gamePos" id="pos3"></div>
+                        </button>
+
+                    </div>
+                    <div class="colM">
+                        <button type="button" class="gameBtn" onclick="userTurn('pos4')">
+                            <div class="gamePos" id="pos4"></div>
+                        </button>
+
+                    </div>
+                    <div class="colL">
+                        <button type="button" class="gameBtn" onclick="userTurn('pos5')">
+                            <div class="gamePos" id="pos5"></div>
+                        </button>
+
+                    </div>
+                </div>
+                <div class="bottom">
+                    <div class="colR">
+                        <button type="button" class="gameBtn" onclick="userTurn('pos6')">
+                            <div class="gamePos" id="pos6"></div>
+                        </button>
+
+                    </div>
+                    <div class="colM">
+                        <button type="button" class="gameBtn" onclick="userTurn('pos7')">
+                            <div class="gamePos" id="pos7"></div>
+                        </button>
+
+                    </div>
+                    <div class="colL">
+                        <button type="button" class="gameBtn" onclick="userTurn('pos8')">
+                            <div class="gamePos" id="pos8"></div>
+                        </button>
+
+                    </div>
                 </div>
             </div>
-            <div class="middle">
-                <div class="colR">
-                    <button type="button" class="gameBtn" onclick="userTurn('pos3')">
-                        <div class="gamePos" id="pos3"></div>
-                    </button>
-
-                </div>
-                <div class="colM">
-                    <button type="button" class="gameBtn" onclick="userTurn('pos4')">
-                        <div class="gamePos" id="pos4"></div>
-                    </button>
-
-                </div>
-                <div class="colL">
-                    <button type="button" class="gameBtn" onclick="userTurn('pos5')">
-                        <div class="gamePos" id="pos5"></div>
-                    </button>
-
-                </div>
-            </div>
-            <div class="bottom">
-                <div class="colR">
-                    <button type="button" class="gameBtn" onclick="userTurn('pos6')">
-                        <div class="gamePos" id="pos6"></div>
-                    </button>
-
-                </div>
-                <div class="colM">
-                    <button type="button" class="gameBtn" onclick="userTurn('pos7')">
-                        <div class="gamePos" id="pos7"></div>
-                    </button>
-
-                </div>
-                <div class="colL">
-                    <button type="button" class="gameBtn" onclick="userTurn('pos8')">
-                        <div class="gamePos" id="pos8"></div>
-                    </button>
-
-                </div>
-            </div>
-
         </div>
     </div>
+    
 </body>
 
 </html>

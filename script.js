@@ -1,19 +1,50 @@
 
 var turnCnt = 0;
-
-function checkTurn() {
-    if (turnCnt % 2 == 0) {
-        document.getElementById("turn") = "Your Turn";
-        return;
-    }
-    else {
-        document.getElementById("turn") = "Computer Turn";
-        computerTurn();
-    }
-}
+var win = false;
 
 function checkWin() {
+    //get content of all spaces
+    var pos0Cont = document.getElementById('pos0').innerHTML;
+    var pos1Cont = document.getElementById('pos1').innerHTML;
+    var pos2Cont = document.getElementById('pos2').innerHTML;
+    var pos3Cont = document.getElementById('pos3').innerHTML;
+    var pos4Cont = document.getElementById('pos4').innerHTML;
+    var pos5Cont = document.getElementById('pos5').innerHTML;
+    var pos6Cont = document.getElementById('pos6').innerHTML;
+    var pos7Cont = document.getElementById('pos7').innerHTML;
+    var pos8Cont = document.getElementById('pos8').innerHTML;
 
+    //check for matches
+    if (
+        //horizontal
+        (pos0Cont != "" && pos0Cont == pos1Cont && pos1Cont == pos2Cont) ||
+        (pos3Cont != "" && pos3Cont == pos4Cont && pos4Cont == pos5Cont) ||
+        (pos6Cont != "" && pos6Cont == pos7Cont && pos7Cont == pos8Cont) ||
+        //vertical
+        (pos0Cont != "" && pos0Cont == pos3Cont && pos3Cont == pos6Cont) ||
+        (pos1Cont != "" && pos1Cont == pos4Cont && pos4Cont == pos7Cont) ||
+        (pos2Cont != "" && pos2Cont == pos5Cont && pos5Cont == pos8Cont) ||
+        //diagonal
+        (pos0Cont != "" && pos0Cont == pos4Cont && pos4Cont == pos8Cont) ||
+        (pos2Cont != "" && pos2Cont == pos4Cont && pos4Cont == pos6Cont)
+    ) {
+        win = true;
+        return win;
+    }
+    //check for tie
+    else if (pos0Cont != "" && pos1Cont != "" && pos2Cont != "" &&
+        pos3Cont != "" && pos4Cont != "" && pos5Cont != "" &&
+        pos6Cont != "" && pos7Cont != "" && pos8Cont != "") {
+        //display tie
+        document.getElementById("turn").innerHTML = "It's a Tie!";
+        win = true;
+        //show again btn
+        document.getElementById("againBtn").style.display = "block";
+    }
+    else {
+        win = false;
+        return win;
+    }
 }
 
 function checkPlace(pos) {
@@ -28,51 +59,100 @@ function checkPlace(pos) {
 }
 
 function computerTurn() {
-    //display computer turn
-    document.getElementById("turn").innerHTML = "Computer Turn";
+    if (win == false) {
+        //clear warning
+        document.getElementById("warning").innerHTML = "";
 
-    //delay turn by 1 second
-    setTimeout(function () {
-        //randomize position
-        var rand = Math.floor(Math.random() * 8);
+        //display computer turn
+        document.getElementById("turn").innerHTML = "Computer Turn";
 
-        var pos = "pos" + rand;
+        //delay turn by 1 second
+        setTimeout(function () {
+            //randomize position
+            var rand = Math.floor(Math.random() * 8);
 
-        //debugging
-        // console.log(pos);
+            var pos = "pos" + rand;
 
-        if (checkPlace(pos)) {
-            document.getElementById(pos).innerHTML = "X";
-            turnCnt++;
-        }
-        else{
-            computerTurn();
-        }
-    }, 1000);
+            //debugging
+            // console.log(pos);
+
+            if (checkPlace(pos)) {
+                document.getElementById(pos).innerHTML = "X";
+                turnCnt++;
+                if (checkWin()) {
+                    //display computer win
+                    document.getElementById("turn").innerHTML = "Computer Won!";
+                    //show again btn
+                    document.getElementById("againBtn").style.display = "block";
+                }
+                else {
+                    //display your turn
+                    document.getElementById("turn").innerHTML = "Your Turn";
+                }
+            }
+            else {
+                computerTurn();
+            }
+        }, 1000);
+
+    }
 
 
 
 }
 
 function userTurn(pos) {
+    if (win == false) {
+        if (turnCnt % 2 == 0) {
+            if (checkPlace(pos)) {
+                //clear warning
+                document.getElementById("warning").innerHTML = "";
+
+                document.getElementById(pos).innerHTML = "O";
+                turnCnt++;
+                if (checkWin()) {
+                    //display user win
+                    document.getElementById("turn").innerHTML = "User Won!";
+                    //show again btn
+                    document.getElementById("againBtn").style.display = "block";
+                }
+                else {
+                    computerTurn();
+                }
+
+            }
+            else {
+                document.getElementById("warning").innerHTML = "Oops! Choose and empty space";
+            }
+        }
+        else {
+            document.getElementById("warning").innerHTML = "Oops! Not your turn";
+            computerTurn();
+        }
+    }
+
+}
+
+function playAgain() {
+    win = false;
+
+    //clear content of all spaces
+    document.getElementById('pos0').innerHTML = "";
+    document.getElementById('pos1').innerHTML = "";
+    document.getElementById('pos2').innerHTML = "";
+    document.getElementById('pos3').innerHTML = "";
+    document.getElementById('pos4').innerHTML = "";
+    document.getElementById('pos5').innerHTML = "";
+    document.getElementById('pos6').innerHTML = "";
+    document.getElementById('pos7').innerHTML = "";
+    document.getElementById('pos8').innerHTML = "";
 
     //display your turn
     document.getElementById("turn").innerHTML = "Your Turn";
-    
-    if (turnCnt % 2 == 0) {
-        if (checkPlace(pos)) {
-            document.getElementById(pos).innerHTML = "O";
-            turnCnt++;
-            checkWin();
-            computerTurn();
-        }
-        else {
-            document.getElementById("warning").innerHTML = "Oops! Choose and empty space";
-        }
-    }
-    else {
-        document.getElementById("warning").innerHTML = "Oops! Not your turn";
-        computerTurn();
-    }
 
+    //clear warning
+    document.getElementById("warning").innerHTML = "";
+
+    //hide again btn
+    document.getElementById("againBtn").style.display = "none";
 }
