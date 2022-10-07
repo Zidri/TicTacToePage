@@ -2,6 +2,9 @@
 var turnCnt = 0;
 var win = false;
 
+//allow two users to play against each other
+var twoPlayer = false;
+
 function checkWin() {
     //get content of all spaces
     var pos0Cont = document.getElementById('pos0').innerHTML;
@@ -59,7 +62,7 @@ function checkPlace(pos) {
 }
 
 function computerTurn() {
-    if (win == false) {
+    if (win == false && twoPlayer == false) {
         //clear warning
         document.getElementById("warning").innerHTML = "";
 
@@ -103,34 +106,91 @@ function computerTurn() {
 
 function userTurn(pos) {
     if (win == false) {
-        if (turnCnt % 2 == 0) {
-            if (checkPlace(pos)) {
-                //clear warning
-                document.getElementById("warning").innerHTML = "";
+        if (twoPlayer == false) {
+            if (turnCnt % 2 == 0) {
+                if (checkPlace(pos)) {
+                    //clear warning
+                    document.getElementById("warning").innerHTML = "";
 
-                document.getElementById(pos).innerHTML = "O";
-                turnCnt++;
-                if (checkWin()) {
-                    //display user win
-                    document.getElementById("turn").innerHTML = "User Won!";
-                    //show again btn
-                    document.getElementById("againBtn").style.display = "block";
+                    document.getElementById(pos).innerHTML = "O";
+                    turnCnt++;
+                    if (checkWin()) {
+                        //display user win
+                        document.getElementById("turn").innerHTML = "User Won!";
+                        //show again btn
+                        document.getElementById("againBtn").style.display = "block";
+                    }
+                    else {
+                        computerTurn();
+                    }
+
                 }
                 else {
-                    computerTurn();
+                    document.getElementById("warning").innerHTML = "Oops! Choose and empty space";
                 }
-
             }
             else {
-                document.getElementById("warning").innerHTML = "Oops! Choose and empty space";
+                document.getElementById("warning").innerHTML = "Oops! Not your turn";
+                computerTurn();
             }
         }
         else {
-            document.getElementById("warning").innerHTML = "Oops! Not your turn";
-            computerTurn();
-        }
-    }
+            if (turnCnt % 2 == 0) {
+                if (checkPlace(pos)) {
+                    //clear warning
+                    document.getElementById("warning").innerHTML = "";
 
+                    document.getElementById(pos).innerHTML = "O";
+                    turnCnt++;
+                    if (checkWin()) {
+                        //display player 1 win
+                        document.getElementById("turn").innerHTML = "Player 1 Wins!";
+                        //show again btn
+                        document.getElementById("againBtn").style.display = "block";
+                    }
+                    else if (win == true) {
+                        //display tie
+                        document.getElementById("turn").innerHTML = "It's a Tie!";
+                    }
+                    else {
+                        //display turn
+                        document.getElementById("turn").innerHTML = "Player 2's Turn";
+                    }
+                }
+                else {
+                    document.getElementById("warning").innerHTML = "Oops! Choose and empty space";
+                }
+            }
+            else {
+                if (checkPlace(pos)) {
+                    //clear warning
+                    document.getElementById("warning").innerHTML = "";
+
+                    document.getElementById(pos).innerHTML = "X";
+                    turnCnt++;
+                    if (checkWin()) {
+                        //display player 2 win
+                        document.getElementById("turn").innerHTML = "Player 2 Wins!";
+                        //show again btn
+                        document.getElementById("againBtn").style.display = "block";
+
+                    }
+                    else if (win == true) {
+                        //display tie
+                        document.getElementById("turn").innerHTML = "It's a Tie!";
+                    }
+                    else {
+                        //display turn
+                        document.getElementById("turn").innerHTML = "Player 1's Turn";
+                    }
+                }
+                else {
+                    document.getElementById("warning").innerHTML = "Oops! Choose and empty space";
+                }
+            }
+        }
+
+    }
 }
 
 function playAgain() {
@@ -147,12 +207,29 @@ function playAgain() {
     document.getElementById('pos7').innerHTML = "";
     document.getElementById('pos8').innerHTML = "";
 
-    //display your turn
-    document.getElementById("turn").innerHTML = "Your Turn";
-
+    if (twoPlayer) {
+        //display turn
+        document.getElementById("turn").innerHTML = "Player 1's Turn";
+    }
+    else {
+        //display your turn
+        document.getElementById("turn").innerHTML = "Your Turn";
+    }
     //clear warning
     document.getElementById("warning").innerHTML = "";
 
     //hide again btn
     document.getElementById("againBtn").style.display = "none";
+}
+
+function changeMode() {
+    if (twoPlayer) {
+        twoPlayer = false;
+        document.getElementById("modeBtn").innerHTML = "2 Player Mode";
+    }
+    else {
+        twoPlayer = true;
+        document.getElementById("modeBtn").innerHTML = "1 Player Mode";
+    }
+    playAgain();
 }
